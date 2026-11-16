@@ -1,0 +1,35 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "discord-dot-bridge",
+  "main": "build/index.js",
+  "compatibility_date": "2026-08-06",
+  "workers_dev": false,
+  "build": {
+    "command": "bash scripts/build-rust.sh"
+  },
+  "vars": {
+    "DISCORD_APPLICATION_ID": "",
+    "DISCORD_PUBLIC_KEY": "",
+    "DISCORD_BOT_USER_ID": "",
+    "DISCORD_GUILD_ID": "",
+    "DISCORD_CHANNEL_ID": "",
+    "ALLOWED_USER_IDS": "",
+    "ACCEPT_TASKS": "false",
+    "MCP_ENABLED": "false",
+    "MCP_HOST": "",
+    "ACCESS_ISSUER": "",
+    "ACCESS_AUD": "",
+    "ACCESS_SUBJECT": "",
+    "LEGACY_HTTP_ENABLED": "false",
+    "MCP_EVENTS_ENABLED": "false",
+    "EVENTS_TRANSPORT_VERIFIED": "false",
+    "EVENT_CALLBACK_HOSTS": ""
+  },
+  "observability": {
+    "enabled": false
+  },
+  "preview_urls": false,
+  "compatibility_flags": [
+    "global_fetch_strictly_public"
+  ]
+}

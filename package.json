@@ -1,0 +1,55 @@
+{
+  "name": "discord-dot-bridge",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "test": "cargo test --locked && node --test test/*.test.js",
+    "test:rust": "cargo test --locked",
+    "test:worker": "node --test test/*.test.js",
+    "check": "cargo check --locked --target wasm32-unknown-unknown",
+    "build": "bash scripts/build-rust.sh",
+    "dev": "wrangler dev",
+    "deploy": "wrangler deploy",
+    "register": "node scripts/register-command.js"
+  },
+  "engines": {
+    "node": ">=22"
+  },
+  "devDependencies": {
+    "miniflare": "4.20260730.0",
+    "wrangler": "4.162.0"
+  },
+  "cloudflare": {
+    "bindings": {
+      "DISCORD_PUBLIC_KEY": {
+        "description": "Discord application's public verification key (not bot token)."
+      },
+      "DISCORD_BOT_TOKEN": {
+        "description": "Existing bot token. Enter directly into Cloudflare secrets; never commit it."
+      },
+      "ALLOWED_USER_IDS": {
+        "description": "Comma-separated owner Discord IDs. Empty denies all users."
+      },
+      "MCP_HOST": {
+        "description": "Exact custom MCP hostname protected by Cloudflare Access. workers.dev and preview URLs stay disabled."
+      },
+      "ACCESS_ISSUER": {
+        "description": "Cloudflare Access team issuer, e.g. https://team.cloudflareaccess.com"
+      },
+      "ACCESS_AUD": {
+        "description": "Access application audience tag."
+      },
+      "ACCESS_SUBJECT": {
+        "description": "Authorized owner Access user subject UUID. Not a display name."
+      },
+      "SUBSCRIPTION_ENCRYPTION_KEY": {
+        "description": "Optional Events-only secret: 64 hex characters for AES-256-GCM. Enter directly into Worker secrets; requires private SUBSCRIPTIONS R2 binding and activation gates."
+      }
+    }
+  },
+  "overrides": {
+    "undici": "7.30.1",
+    "sharp": "0.35.5"
+  }
+}
